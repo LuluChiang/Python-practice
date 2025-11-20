@@ -384,6 +384,22 @@ class Solution:
             if no_swap:
                 break
         return 
+
+    def merge_2(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        # add element from the tail, can do in one for loop
+        nums1_end, nums2_end = m-1, n-1
+        idx = m+n-1
+        #for idx in range(m+n-1, 0 , -1):
+        while(True):
+            if nums1[nums1_end] > nums2[nums2_end]:
+                nums1[idx] = nums1[nums1_end]
+                nums1_end-=1
+            else:
+                nums1[idx] = nums1[nums2_end]
+                nums2_end-=1
+            if nums1_end >= 0 or nums2_end >=0:
+                break
+        return
     
 #977. Squares of a Sorted Array
 # Given an integer array nums sorted in non-decreasing order, 
@@ -692,6 +708,7 @@ class Solution:
                 position = next_position
                 min_count += 1
         return min_count
+    
             
 
 # 678. Valid Parenthesis String                
@@ -724,6 +741,28 @@ class Solution:
             if mincount < 0:
                 mincount = 0
         return mincount == 0
+# 1029. Two City Scheduling
+# A company is planning to interview 2n people. 
+# Given the array costs where costs[i] = [aCosti, bCosti], 
+#       the cost of flying the ith person to city a is aCosti, 
+#       and the cost of flying the ith person to city b is bCosti.
+# Return the minimum cost to fly every person to a city such that exactly n people arrive in each city.
+    def key_func1(list_n):
+        diff = list_n[2]
+        return diff
+
+    def twoCitySchedCost(self, costs: List[List[int]]) -> int:
+        for i in range(len(costs)):
+            costs[i].append(costs[i][0] - costs[i][1])
         
+        costs.sort(key=self.key_func1)
+        
+
+
+        print(costs)
+        return
+        
+  
+
         
      
