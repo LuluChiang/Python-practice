@@ -120,6 +120,14 @@ class Solution:
 #         self.val = val
 #         self.left = left
 #         self.right = right
+# 2025/11/19    
+    def invertTree2(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        if not root: return None
+        self.invertTree2(root.left)
+        self.invertTree2(root.right)
+        root.left, root.right = root.right, root.left
+        return root
+
 # 2024/9/12    
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
         
