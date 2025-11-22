@@ -143,10 +143,75 @@ class Solution:
         # or use:
         (root.left, root.right) = (root.right, root.left) #tuple assignment
 
-
         # recursive part
         self.invertTree(root.left)
         self.invertTree(root.right)
     
         return root
 
+# Binary Tree Traversal
+# 2025/11/22
+#   def DFS_Left_preorder(self, root):
+#   def DFS_Left_inorder(self, root):
+#   def DFS_Left_postorder(self, root):
+#   def DFS_Right_preorder(self, root):
+#   def DFS_Right_inorder(self, root):
+#   def DFS_Right_postorder(self, root):
+    def DFS_Left_preorder(self, root)-> list: 
+        if not root: 
+            return None
+        #print(root.val)
+        rtn_list = [root.val]
+        #rtn_list += self.DFS_Left_preorder(root.left)
+        rtn_list.extend(self.DFS_Left_preorder(root.left))
+        #rtn_list += self.DFS_Left_preorder(root.right)
+        rtn_list.extend(self.DFS_Left_preorder(root.right))
+        return rtn_list
+    def DFS_Left_preorder_iteration(self, root) -> list:
+        if not root: 
+            return None
+        rtn_list = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            rtn_list.append(node.val)
+            #由於stack是LIFO，所以right先放，left後放先出
+            if node.right:
+                stack.append(node.right)
+            if node.left:
+                stack.append(node.left)
+
+        return rtn_list
+    def DFS_Left_inorder_iteration(self, root) -> list:
+        if not root:
+            return None
+        rtn_list = []
+        stack = []
+        node = root
+        while stack or node:
+            #先往左邊走，並且先把自己存起來
+            while node:
+                stack.append(node)
+                node = node.left
+            node = stack.pop()
+            rtn_list.append(node.val)
+            node = node.right
+        return rtn_list
+    
+    def DFS_Left_postorder_iteration(self, root) -> list:
+        if not root:
+            return None
+        rtn_list = []
+        stack = [root]
+        
+        while stack:
+            node = stack.pop()
+            rtn_list.append(root.val)
+            if node.left:
+                stack.append(node.left)
+            if node.right:
+                stack.append(node.right)
+
+        return rtn_list[::-1]
+    
+ 
