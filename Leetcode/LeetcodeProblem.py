@@ -747,7 +747,7 @@ class Solution:
 #       the cost of flying the ith person to city a is aCosti, 
 #       and the cost of flying the ith person to city b is bCosti.
 # Return the minimum cost to fly every person to a city such that exactly n people arrive in each city.
-    def key_func1(list_n):
+    def key_func1(self, list_n):
         diff = list_n[2]
         return diff
 
@@ -757,12 +757,26 @@ class Solution:
         
         costs.sort(key=self.key_func1)
         
-
-
-        print(costs)
-        return
-        
-  
-
+        total_cost = 0
+        for i in range(len(costs)):
+            if i < len(costs)//2:
+                #print(costs[i][0])
+                total_cost += costs[i][0]
+            else:
+                #print(costs[i][1])
+                total_cost += costs[i][1]
+            #print(str(i) + ":" + str(total_cost))
+        return total_cost
+#精簡:  
+    def twoCitySchedCost2(self, costs: List[List[int]]) -> int:
+        #用costs[0] - costs[1]的結果來排序
+        costs.sort(key = lambda x: x[0] - x[1])
+        total_cost = 0
+        for i in range(len(costs)):
+            if i < len(costs)//2:
+                total_cost += costs[0]
+            else:
+                total_cost += costs[1]
+        return total_cost
         
      
